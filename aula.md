@@ -54,3 +54,28 @@ Como um lego, você irá utilizar peças para criar algoritmos, ou seja, para re
 - Criar, passar argumento
 - Executar
 - Arrow Function / Named Function
+
+## Estrutura de repetição
+
+- While: while () {}
+
+## Condicionais
+
+- Switch: switch (option){ case 1:; case 2:; case 3:; ...; Default:}
+
+## NPM
+
+Para conseguirmos utilizar o menu do switch da melhor maneira, precisamos adicionar um módulo à parte
+NPM significa node package manager, ou seja, gerenciador de pacotes do node. Essa instalação é feita
+através terminal.
+
+APós baixar a o pacote desejado, irá aparecer uma nova pasta chamada "modules" do node dentro da pasta
+onde você está trabalhando, no caso, dentro do seu "app".
+
+O arquivo "package.json" que foi criado junto com a instalação do módulo do node.js "inquirer", diz
+quais são os módulos utilizados.
+
+Visando uma questão de organização, importância e tamanho, não vamos realizar o git push/pull dos módulos
+do node.js ou qualquer arquivo "inútil" e pesado que possa estar dentro do nosso projeto, para isso
+existe o ".gitignore" que avisa para o gerenciador de arquivos do git que esses arquivos ou pastas não
+devem ser levados em consideração no controle de versionamento. 
