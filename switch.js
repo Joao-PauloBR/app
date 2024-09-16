@@ -2,15 +2,26 @@ const { select, input, checkbox } = require('@inquirer/prompts')
 // select mostra uma lista
 // input é o campo de entrada para o usuário digitar
 // checkbox
+const fs = require("fs").promises
+// 
 
 let mensagem = "Bem-vindo ao app de metas!"
 
-let meta = {
-    value: "Estudar programação 120 minutos por dia",
-    checked: false
+let metas
+
+const carregarMetas = async () => {
+    try{
+        const dados = await fs.readFile("metas.json", "utf-8")
+        metas = JSON.parse(dados)
+    }
+    catch(erro){
+        metas = []
+    }
 }
 
-let metas = [meta]
+const salvarMetas = async () => {
+    await fs.writeFile("metas.json", JSON.stringify(metas, null, 2))
+} // As últimas duas opções da vírgula servem para configurar o arquivo JSON
 
 const cadastrarMeta = async () => {
     const meta = await input({ message: "Digite a meta: " })
@@ -60,6 +71,11 @@ const deletarMetas = async () => {
 }
 
 const listarMetas = async () => {
+    if (metas.length == 0){
+        mensagem = "Não há nenhuma meta para ser listada. Adicione alguma primeiro"
+        return
+    }
+
     const respostas = await checkbox({
         message: "Use as SETAS para mudar de meta, o ESPAÇO para marcar/desmarcar e o ENTER para finalizar essa etapa",
         choices: [...metas],
@@ -131,9 +147,12 @@ const mostrarMensagem = () => {
 //-------------------------------------------------------
 
 const start = async () => {
+    await carregarMetas()
 
     while (true) {
         mostrarMensagem()
+        await salvarMetas()
+        
         const opcao = await select({
             message: "Menu >",
             choices: [

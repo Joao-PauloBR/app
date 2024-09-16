@@ -70,7 +70,8 @@ Como um lego, você irá utilizar peças para criar algoritmos, ou seja, para re
 ## Módulos em Node.JS (npm)
 
 - Importação de módulos (require, CommonJS)
--   Biblioteca "inquirer" para criar prompts interativos
+- Biblioteca "inquirer" para criar prompts interativos
+- FS (File System)
 
 Para conseguirmos utilizar o menu do switch da melhor maneira, precisamos adicionar um módulo à parte
 NPM significa node package manager, ou seja, gerenciador de pacotes do node. Essa instalação é feita
@@ -86,6 +87,12 @@ Visando uma questão de organização, importância e tamanho, não vamos realiz
 do node.js ou qualquer arquivo "inútil" e pesado que possa estar dentro do nosso projeto, para isso
 existe o ".gitignore" que avisa para o gerenciador de arquivos do git que esses arquivos ou pastas não
 devem ser levados em consideração no controle de versionamento. 
+
+## JSON
+
+- JavaScript Object Notation (.json)
+- JSON.parse(): transforma de JSON para JavaScript
+- JSON.stringify(): transforma de JavaScript para JSON
 
 ## Programação assíncrona e promessas:
 
