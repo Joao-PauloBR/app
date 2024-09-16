@@ -22,7 +22,31 @@ const cadastrarMeta = async () => {
             value: meta,
             checked: false
         }) // Checked sempre começa como falsa porque você está querendo cadastrar uma meta.
-        // Não faria sentido se esse meta já estivesse cumprida.
+    // Não faria sentido se esse meta já estivesse cumprida.
+}
+
+const deletarMetas = async () => {
+    const metasDesmarcadas = metas.map((meta) => {
+        return { value: meta.value, checked: false }
+    })
+
+    const itensADeletar = await checkbox({
+        message: "Selecione o item que deseja deletar",
+        choices: [...metasDesmarcadas],
+        instructions: false
+    })
+    
+    if (itensADeletar.length == 0){
+        console.log("Nenhum item foi selecionado para ser deletado!")
+    }
+
+    itensADeletar.forEach((item) => {
+        metas = metas.filter((meta) => {
+            return meta.value != item
+        })
+    })
+
+    console.log("Meta(s) deletada(s) com sucesso!")
 }
 
 const listarMetas = async () => {
@@ -31,8 +55,8 @@ const listarMetas = async () => {
         choices: [...metas],
         instructions: false
     })
-    
-    metas.forEach ((m) => {
+
+    metas.forEach((m) => {
         m.checked = false
     })
 
@@ -57,7 +81,7 @@ const metasAbertas = async () => {
         // Poderia ter sido feito da seguinte maneira também:
         // return !meta.checked
     })
-    if (abertas.length == 0){
+    if (abertas.length == 0) {
         console.log("Parabéns! Vocẽ não possui nenhuma meta aberta 😄")
         return
     }
@@ -73,7 +97,7 @@ const metasRealizadas = async () => {
     const realizadas = metas.filter((meta) => {
         return meta.checked
     })
-    if (realizadas.length == 0){
+    if (realizadas.length == 0) {
         console.log("Não existem metas realizadas 😢")
         return
     }
@@ -95,6 +119,10 @@ const start = async () => {
                 {
                     name: "Cadastrar meta",
                     value: "cadastrar"
+                },
+                {
+                    name: "Deletar metas",
+                    value: "deletar"
                 },
                 {
                     name: "Listar metas",
@@ -120,7 +148,10 @@ const start = async () => {
             case "cadastrar":
                 await cadastrarMeta()
                 console.log(metas)
-                break;
+                break
+            case "deletar":
+                await deletarMetas()
+                break
             case "listar":
                 await listarMetas()
                 break
