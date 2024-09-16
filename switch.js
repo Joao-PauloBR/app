@@ -3,6 +3,8 @@ const { select, input, checkbox } = require('@inquirer/prompts')
 // input é o campo de entrada para o usuário digitar
 // checkbox
 
+let mensagem = "Bem-vindo ao app de metas!"
+
 let meta = {
     value: "Estudar programação 120 minutos por dia",
     checked: false
@@ -14,8 +16,8 @@ const cadastrarMeta = async () => {
     const meta = await input({ message: "Digite a meta: " })
 
     if (meta.length == 0) {
-        console.log("A meta não pode ser vazia.")
-        return cadastrarMeta()
+        mensagem = "A meta não pode ser vazia."
+        return
     }
     metas.push(
         {
@@ -23,9 +25,16 @@ const cadastrarMeta = async () => {
             checked: false
         }) // Checked sempre começa como falsa porque você está querendo cadastrar uma meta.
     // Não faria sentido se esse meta já estivesse cumprida.
+
+    mensagem = "Meta cadastrada com sucesso!"
 }
 
 const deletarMetas = async () => {
+    if (metas.length == 0){
+        mensagem = "Não há nenhuma meta para ser deletada. Adicione alguma primeiro"
+        return
+    }
+    
     const metasDesmarcadas = metas.map((meta) => {
         return { value: meta.value, checked: false }
     })
@@ -37,7 +46,8 @@ const deletarMetas = async () => {
     })
     
     if (itensADeletar.length == 0){
-        console.log("Nenhum item foi selecionado para ser deletado!")
+        mensagem = "Nenhum item foi selecionado para ser deletado!"
+        return
     }
 
     itensADeletar.forEach((item) => {
@@ -46,7 +56,7 @@ const deletarMetas = async () => {
         })
     })
 
-    console.log("Meta(s) deletada(s) com sucesso!")
+    mensagem = "Meta(s) deletada(s) com sucesso!"
 }
 
 const listarMetas = async () => {
@@ -61,7 +71,7 @@ const listarMetas = async () => {
     })
 
     if (respostas.length == 0) {
-        console.log("Nenhuma meta selecionada!")
+        mensagem = "Nenhuma meta selecionada!"
         return
     }
 
@@ -72,7 +82,7 @@ const listarMetas = async () => {
         meta.checked = true
     })
 
-    console.log("Meta(s) marcadas como concluída(s)")
+    mensagem = "Meta(s) marcada(s) como concluída(s)"
 }
 
 const metasAbertas = async () => {
@@ -82,7 +92,7 @@ const metasAbertas = async () => {
         // return !meta.checked
     })
     if (abertas.length == 0) {
-        console.log("Parabéns! Vocẽ não possui nenhuma meta aberta 😄")
+        mensagem = "Parabéns! Vocẽ não possui nenhuma meta aberta 😄"
         return
     }
 
@@ -98,7 +108,7 @@ const metasRealizadas = async () => {
         return meta.checked
     })
     if (realizadas.length == 0) {
-        console.log("Não existem metas realizadas 😢")
+        mensagem = "Não existem metas realizadas 😢"
         return
     }
 
@@ -107,12 +117,23 @@ const metasRealizadas = async () => {
         choices: [...realizadas]
     })
 }
+
+const mostrarMensagem = () => {
+    console.clear()
+
+    if (mensagem != ""){
+        console.log(mensagem)
+        console.log("")
+        mensagem = ""
+    }
+}
+
 //-------------------------------------------------------
 
 const start = async () => {
 
     while (true) {
-
+        mostrarMensagem()
         const opcao = await select({
             message: "Menu >",
             choices: [
@@ -147,7 +168,6 @@ const start = async () => {
         switch (opcao) {
             case "cadastrar":
                 await cadastrarMeta()
-                console.log(metas)
                 break
             case "deletar":
                 await deletarMetas()
