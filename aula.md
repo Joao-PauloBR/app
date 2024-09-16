@@ -39,11 +39,12 @@ Como um lego, você irá utilizar peças para criar algoritmos, ou seja, para re
 - Operador de atribuição de valor: =
 - Operador de concatenação: +
 - Operadores de comparação: ==  !=  <=  >=  < >
+- Spread operator: ...
 
 ## Arrays
 
 - Uma lista que contém qualquer tipo de dado
-- Métodos de array: push, find, forEach
+- Métodos de array: push, [find, forEach, filter - São HOF: Higher Order Functions]
 
 ## Objetos
 
