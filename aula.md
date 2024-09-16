@@ -63,7 +63,10 @@ Como um lego, você irá utilizar peças para criar algoritmos, ou seja, para re
 
 - Switch: switch (option){ case 1:; case 2:; case 3:; ...; Default:}
 
-## NPM
+## Módulos em Node.JS (npm)
+
+- Importação de módulos (require, CommonJS)
+-   Biblioteca "inquirer" para criar prompts interativos
 
 Para conseguirmos utilizar o menu do switch da melhor maneira, precisamos adicionar um módulo à parte
 NPM significa node package manager, ou seja, gerenciador de pacotes do node. Essa instalação é feita
@@ -79,3 +82,7 @@ Visando uma questão de organização, importância e tamanho, não vamos realiz
 do node.js ou qualquer arquivo "inútil" e pesado que possa estar dentro do nosso projeto, para isso
 existe o ".gitignore" que avisa para o gerenciador de arquivos do git que esses arquivos ou pastas não
 devem ser levados em consideração no controle de versionamento. 
+
+## Programação assíncrona e promessas:
+
+- Uso de funções assíncronas (async/await)
